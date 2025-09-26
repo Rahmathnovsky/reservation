@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VillaEscape - Pemesanan Villa Modern</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #3a86ff;
+            --primary-dark: #2667cc;
+            --secondary: #ff9e00;
+            --accent: #ff5e6c;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #38b000;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .logo-icon {
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .form-container {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .villa-preview {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .villa-image {
+            height: 200px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            color: white;
+        }
+
+        .villa-info {
+            padding: 25px;
+        }
+
+        .villa-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .villa-location {
+            display: flex;
+            align-items: center;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .villa-location i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+
+        .villa-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            background: var(--light);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+        }
+
+        .feature i {
+            margin-right: 5px;
+            color: var(--primary);
+        }
+
+        .villa-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .price-note {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .form-section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .date-inputs {
+            display: flex;
+            gap: 15px;
+        }
+
+        .date-inputs .form-group {
+            flex: 1;
+        }
+
+        .guest-selector {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .guest-btn {
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .guest-btn:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .guest-count {
+            flex: 1;
+            text-align: center;
+            font-weight: 600;
+            padding: 0 10px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+
+        .total-price {
+            background: var(--light);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .total-label {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        .total-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(58, 134, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(58, 134, 255, 0.4);
+        }
+
+        .benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 15px 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            max-width: 280px;
+        }
+
+        .benefit-icon {
+            background: var(--light);
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .benefit-text {
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .date-inputs {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-container, .villa-preview, .benefit {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .villa-preview {
+            animation-delay: 0.2s;
+        }
+
+        .benefit:nth-child(1) { animation-delay: 0.4s; }
+        .benefit:nth-child(2) { animation-delay: 0.6s; }
+        .benefit:nth-child(3) { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-umbrella-beach"></i>
+                </div>
+                <h1>VillaEscape</h1>
+            </div>
+            <p class="tagline">Temukan pengalaman menginap terbaik di villa mewah dengan pemandangan menakjubkan</p>
+        </header>
+
+        <div class="main-content">
+            <div class="form-container">
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-user"></i> Informasi Pemesan</h2>
+                    <div class="form-group">
+                        <label for="fullname">Nama Lengkap</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="fullname" placeholder="Masukkan nama lengkap">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" placeholder="alamat@email.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Nomor Telepon</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="phone" placeholder="08xxxxxxxxxx">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Detail Pemesanan</h2>
+                    <div class="date-inputs">
+                        <div class="form-group">
+                            <label for="checkin">Check-in</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <input type="date" id="checkin">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout">Check-out</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <input type="date" id="checkout">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">Jumlah Tamu</label>
+                        <div class="guest-selector">
+                            <button class="guest-btn" id="decrease-guests">-</button>
+                            <div class="guest-count" id="guest-count">2</div>
+                            <button class="guest-btn" id="increase-guests">+</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="villa-type">Tipe Villa</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-home"></i>
+                            <select id="villa-type">
+                                <option value="standard">Standard Villa (2 Kamar)</option>
+                                <option value="deluxe">Deluxe Villa (3 Kamar)</option>
+                                <option value="premium">Premium Villa (4 Kamar + Pool)</option>
+                                <option value="executive">Executive Villa (5 Kamar + Private Pool)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-concierge-bell"></i> Layanan Tambahan</h2>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="breakfast">
+                        <label for="breakfast">Sarapan Pagi (+Rp 150.000/hari)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="airport">
+                        <label for="airport">Transport Bandara (+Rp 300.000)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="spa">
+                        <label for="spa">Paket Spa (+Rp 500.000)</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="special-requests">Permintaan Khusus</label>
+                        <textarea id="special-requests" placeholder="Permintaan khusus atau catatan tambahan..."></textarea>
+                    </div>
+                </div>
+
+                <div class="total-price">
+                    <div class="total-label">Total Biaya</div>
+                    <div class="total-amount" id="total-amount">Rp 2.500.000</div>
+                </div>
+
+                <button class="btn btn-primary" id="book-now">
+                    <i class="fas fa-check-circle"></i> Pesan Sekarang
+                </button>
+            </div>
+
+            <div class="villa-preview">
+                <div class="villa-image">
+                    <div>
+                        <h2>Sunset Paradise Villa</h2>
+                        <p><i class="fas fa-star"></i> 4.9 (128 Reviews)</p>
+                    </div>
+                </div>
+                <div class="villa-info">
+                    <h3 class="villa-title">Sunset Paradise Villa</h3>
+                    <div class="villa-location">
+                        <i class="fas fa-map-marker-alt"></i> Uluwatu, Bali
+                    </div>
+                    <div class="villa-features">
+                        <div class="feature">
+                            <i class="fas fa-bed"></i> 3 Kamar Tidur
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bath"></i> 2 Kamar Mandi
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-swimming-pool"></i> Kolam Renang
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i> WiFi Gratis
+                        </div>
+                    </div>
+                    <div class="villa-price">Rp 1.250.000 <span class="price-note">/malam</span></div>
+                    <p class="price-note">Termasuk pajak dan biaya kebersihan</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="benefits">
+            <div class="benefit">
+                <div class="benefit-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="benefit-text">Pembatalan Gratis hingga 7 Hari</div>
+            </div>
+            <div class="benefit">
+                <div class="benefit-icon">
+                    <i class="fas fa-concierge-bell"></i>
+                </div>
+                <div class="benefit-text">Layanan 24/7</div>
+            </div>
+            <div class="benefit">
+                <div class="benefit-icon">
+                    <i class="fasfa-award"></i>
+                </div>
+                <div class="benefit-text">Villa Terverifikasi & Bersertifikat</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 VillaEscape. All rights reserved. | <a href="#" style="color: var(--primary);">Kebijakan Privasi</a> | <a href="#" style="color: var(--primary);">Syarat & Ketentuan</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Set min date untuk check-in (hari ini)
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('checkin').min = today;
+        
+        // Set min date untuk check-out (besok)
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById('checkout').min = tomorrow.toISOString().split('T')[0];
+        
+        // Update check-out min date ketika check-in berubah
+        document.getElementById('checkin').addEventListener('change', function() {
+            const checkinDate = new Date(this.value);
+            const nextDay = new Date(checkinDate);
+            nextDay.setDate(nextDay.getDate() + 1);
+            document.getElementById('checkout').min = nextDay.toISOString().split('T')[0];
+            
+            // Jika check-out sebelum check-in yang baru, reset check-out
+            const checkoutDate = new Date(document.getElementById('checkout').value);
+            if (checkoutDate <= checkinDate) {
+                document.getElementById('checkout').value = nextDay.toISOString().split('T')[0];
+            }
+            
+            calculateTotal();
+        });
+        
+        // Fungsi untuk mengatur jumlah tamu
+        let guestCount = 2;
+        const guestCountElement = document.getElementById('guest-count');
+        const decreaseButton = document.getElementById('decrease-guests');
+        const increaseButton = document.getElementById('increase-guests');
+        
+        decreaseButton.addEventListener('click', function() {
+            if (guestCount > 1) {
+                guestCount--;
+                guestCountElement.textContent = guestCount;
+                calculateTotal();
+            }
+        });
+        
+        increaseButton.addEventListener('click', function() {
+            if (guestCount < 10) {
+                guestCount++;
+                guestCountElement.textContent = guestCount;
+                calculateTotal();
+            }
+        });
+        
+        // Fungsi untuk menghitung total biaya
+        function calculateTotal() {
+            const villaType = document.getElementById('villa-type').value;
+            const checkin = new Date(document.getElementById('checkin').value);
+            const checkout = new Date(document.getElementById('checkout').value);
+            
+            // Hitung jumlah malam
+            const nights = Math.ceil((checkout - checkin) / (1000 * 60 * 60 * 24));
+            
+            // Harga dasar berdasarkan tipe villa
+            let basePrice = 0;
+            switch(villaType) {
+                case 'standard': basePrice = 1250000; break;
+                case 'deluxe': basePrice = 1750000; break;
+                case 'premium': basePrice = 2500000; break;
+                case 'executive': basePrice = 3500000; break;
+            }
+            
+            // Hitung total berdasarkan jumlah malam
+            let total = basePrice * (nights > 0 ? nights : 1);
+            
+            // Tambahan biaya untuk layanan tambahan
+            if (document.getElementById('breakfast').checked) {
+                total += 150000 * (nights > 0 ? nights : 1);
+            }
+            if (document.getElementById('airport').checked) {
+                total += 300000;
+            }
+            if (document.getElementById('spa').checked) {
+                total += 500000;
+            }
+            
+            // Format angka ke Rupiah
+            const formatter = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            });
+            
+            document.getElementById('total-amount').textContent = formatter.format(total);
+        }
+        
+        // Panggil calculateTotal ketika ada perubahan
+        document.getElementById('villa-type').addEventListener('change', calculateTotal);
+        document.getElementById('checkin').addEventListener('change', calculateTotal);
+        document.getElementById('checkout').addEventListener('change', calculateTotal);
+        document.getElementById('breakfast').addEventListener('change', calculateTotal);
+        document.getElementById('airport').addEventListener('change', calculateTotal);
+        document.getElementById('spa').addEventListener('change', calculateTotal);
+        
+        // Inisialisasi perhitungan total
+        calculateTotal();
+        
+        // Tombol pesan sekarang
+        document.getElementById('book-now').addEventListener('click', function() {
+            const fullname = document.getElementById('fullname').value;
+            const email = document.getElementById('email').value;
+            const checkin = document.getElementById('checkin').value;
+            
+            if (!fullname || !email || !checkin) {
+                alert('Harap lengkapi informasi pemesan dan tanggal check-in!');
+                return;
+            }
+            
+            // Simulasi proses pemesanan
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+            this.disabled = true;
+            
+            setTimeout(() => {
+                alert('Pemesanan berhasil! Detail konfirmasi telah dikirim ke email Anda.');
+                this.innerHTML = '<i class="fas fa-check-circle"></i> Pesan Sekarang';
+                this.disabled = false;
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
